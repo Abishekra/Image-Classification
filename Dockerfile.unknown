@@ -1,0 +1,21 @@
+# Use a base image with Python installed
+FROM python:3.11
+
+# Set the working directory within the container
+WORKDIR /app
+
+# Copy the application files to the working directory
+COPY . .
+
+# Install required Python packages
+RUN pip install --no-cache-dir numpy tensorflow mysql-connector-python flask
+
+# Expose the port number on which the Flask app runs
+EXPOSE 5000
+
+# Set environment variables
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Command to run the Flask application
+CMD ["python", "app.py"]
